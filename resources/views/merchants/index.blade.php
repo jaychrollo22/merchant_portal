@@ -22,7 +22,13 @@
                                     </div>
                                 @endif
                                 <div class="row mr-2">
-                                    <div class="col-md-1">
+                                    
+
+                                    <div class="col-md-4 mt-1">
+                                        <input class='form-control' name='search' value="{{$search}}" placeholder="Search User">
+                                    </div>
+                                    
+                                    <div class="col-md-1 mt-1">
                                         <select class="form-control" name='limit'>
                                             <option value="">Show</option>
                                             <option value="5" @if($limit==5) selected @endif>5</option>
@@ -32,53 +38,49 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <input class='form-control' name='search' value="{{$search}}" placeholder="Search User">
-                                    </div>
-                                    
-
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mt-1">
                                         <button class="btn btn-primary mr-1" type="submit">Filter</button>
                                     </div>
                                 </div>
                             </form>
-
-                            <table border="1" class="table table-hover table-bordered">
-                              <thead>
-                                <tr>
-                                  <th>Company</th>
-                                  <th>Address</th>
-                                  <th>Website</th>
-                                  <th>Phone</th>
-                                  <th>Contact Person</th>
-                                  <th>Contact Phone</th>
-                                  <th>Contact Email</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                    @foreach($merchants as $merchant)
-                                        <tr>
-                                            <td>{{$merchant->name}}</td>
-                                            <td>{{$merchant->address}}</td>
-                                            <td>
-                                                <a href="{{ $merchant->website }}" target="_blank">{{$merchant->website}}</a>
-                                            </td>
-                                            <td>{{$merchant->phone}}</td>
-                                            
-                                            <td>{{$merchant->contact_person}}</td>
-                                            <td>{{$merchant->contact_phone}}</td>
-                                            <td>{{$merchant->contact_email}}</td>
-                                            <td>
-                                                <a href="/edit-merchant/{{$merchant->id}}" target="_blank" class="btn btn-outline-info btn-icon-text btn-sm">
-                                                    Edit
-                                                    <i class="ti-file btn-icon-append"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                              </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table border="1" class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                    <th>Company</th>
+                                    <th>Address</th>
+                                    <th>Website</th>
+                                    <th>Phone</th>
+                                    <th>Contact Person</th>
+                                    <th>Contact Phone</th>
+                                    <th>Contact Email</th>
+                                    <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        @foreach($merchants as $merchant)
+                                            <tr>
+                                                <td>{{$merchant->name}}</td>
+                                                <td>{{$merchant->address}}</td>
+                                                <td>
+                                                    <a href="{{ $merchant->website }}" target="_blank">{{$merchant->website}}</a>
+                                                </td>
+                                                <td>{{$merchant->phone}}</td>
+                                                
+                                                <td>{{$merchant->contact_person}}</td>
+                                                <td>{{$merchant->contact_phone}}</td>
+                                                <td>{{$merchant->contact_email}}</td>
+                                                <td>
+                                                    <a href="/edit-merchant/{{$merchant->id}}" target="_blank" class="btn btn-outline-info btn-icon-text btn-sm">
+                                                        Edit
+                                                        <i class="ti-file btn-icon-append"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                </tbody>
+                                </table>
+                            </div>
                             {{ $merchants->links() }}
                         </div>
                     </div>

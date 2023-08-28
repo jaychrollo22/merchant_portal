@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
   
   <style>
     .zoom:hover {
@@ -164,7 +166,13 @@
     }
 </script>
   <!-- General JS Scripts -->
+
+  <script src="{{ asset('js/all-1.0.0.js') }}"></script>
+
   <script src="{{ asset('assets/js/app.min.js') }}"></script>
+
+  
+
   <!-- JS Libraies -->
   {{-- <script src="{{ asset('assets/bundles/apexcharts/apexcharts.min.js') }}"></script> --}}
   <!-- Page Specific JS File -->
@@ -180,6 +188,7 @@
   <script src="{{ asset('assets/bundles/sweetalert/sweetalert.min.js') }}"></script>
   <script src="{{ asset('assets/js/page/sweetalert.js') }}"></script>
   <script src="{{ asset('assets/js/page/datatables.js') }}"></script>
+
   @include('sweetalert::alert')
 </body>
 </html>

@@ -69,6 +69,9 @@
             document.getElementById("myDiv").style.display="block";
         }
       </script>
+
+      <script src="{{ asset('js/all-1.0.0.js') }}"></script>
+
       <script src="{{ asset('login_css/js/jquery.min.js') }}"></script>
 	  <script src="{{ asset('login_css/js/popper.js') }}"></script>
 	  <script src="{{ asset('login_css/js/bootstrap.min.js') }}"></script>

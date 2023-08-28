@@ -41,10 +41,11 @@ Route::post('/update-merchant/{merchant}', 'MerchantController@update');
 // Users
 Route::get('/users', 'UserController@index')->name('user');
 Route::get('/create-user', 'UserController@create');
-Route::get('/edit-user', 'UserController@edit');
-Route::get('/change-password-user', 'UserController@changePassword');
+Route::get('/edit-user/{user}', 'UserController@edit');
+Route::get('/change-password/{user}', 'UserController@changePassword');
+Route::post('/change-password-user/{user}', 'UserController@changePasswordUser');
 Route::post('/store-user', 'UserController@store');
-Route::post('/update-user', 'UserController@update');
+Route::post('/update-user/{user}', 'UserController@update');
 
 
 

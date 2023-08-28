@@ -11,4 +11,4 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').browserSync('http://merchant_portal.local/');
+mix.js('resources/js/app.js', 'public/js/all-1.0.0.js').browserSync('http://merchant_portal.local/');

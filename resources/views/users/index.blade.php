@@ -10,6 +10,7 @@
                     <div class="card">
                         <div class="card-header">
                           <h4>Users </h4>
+                          <a href="/create-user" class="btn btn-primary">New</a>
                         </div>
 
                         <div class="card-body">
@@ -57,11 +58,11 @@
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->role}}</td>
                                             <td>
-                                                <a href="/edit-user-role/{{$user->id}}" target="_blank" class="btn btn-outline-info btn-icon-text btn-sm">
+                                                <a href="/edit-user/{{$user->id}}" class="btn btn-outline-info btn-icon-text btn-sm">
                                                     Edit
                                                     <i class="ti-file btn-icon-append"></i>
                                                 </a>
-                                                <a href="/change-password/{{$user->id}}" target="_blank" class="btn btn-outline-info btn-icon-text btn-sm">
+                                                <a href="/change-password/{{$user->id}}" class="btn btn-outline-info btn-icon-text btn-sm">
                                                     Change Password
                                                     <i class="ti-key btn-icon-append"></i>
                                                 </a>
