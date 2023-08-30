@@ -102,7 +102,7 @@
          
        
           <li class="dropdown"><a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{'images/no_image.png'}}" class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{asset('images/no_image.png')}}" class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">Hello {{auth()->user()->name}}</div>
               {{-- <a href="profile.html" class="dropdown-item has-icon"> <i class="far
@@ -129,9 +129,9 @@
             <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
               {{-- @if((auth()->user()->role == "Admin") || (auth()->user()->role == "Approver") ||) --}}
-              <li class="dropdown  @if($header == "Dashboard") active @endif">
+              {{-- <li class="dropdown  @if($header == "Dashboard") active @endif">
                 <a href="{{ url('/') }}" class="nav-link" onclick='show();'><i data-feather="monitor"></i><span>Dashboard</span></a>
-              </li>
+              </li> --}}
               <li class="dropdown  @if($header == "Products") active @endif">
                 <a href="{{ url('/products') }}" class="nav-link" onclick='show();'><i data-feather="image"></i><span>Products</span></a>
               </li>
@@ -167,7 +167,7 @@
 </script>
   <!-- General JS Scripts -->
 
-  <script src="{{ asset('js/all-1.0.0.js') }}"></script>
+  
 
   <script src="{{ asset('assets/js/app.min.js') }}"></script>
 
@@ -190,5 +190,9 @@
   <script src="{{ asset('assets/js/page/datatables.js') }}"></script>
 
   @include('sweetalert::alert')
+
+  <script src="{{ asset('js/all-1.0.0.js') }}"></script>
+
+
 </body>
 </html>

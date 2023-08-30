@@ -27,9 +27,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Products
 Route::get('/products', 'ProductController@index')->name('merchant');
 Route::get('/create-product', 'ProductController@create');
-Route::get('/edit-product', 'ProductController@edit');
+Route::get('/edit-product/{id}', 'ProductController@edit');
+Route::get('/info-product/{id}', 'ProductController@info');
 Route::post('/store-product', 'ProductController@store');
 Route::post('/update-product', 'ProductController@update');
+Route::get('/remove-product-image/{id}', 'ProductController@removeImage');
 
 // Merchant
 Route::get('/merchants', 'MerchantController@index')->name('merchant');

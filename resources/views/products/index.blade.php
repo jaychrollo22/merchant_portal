@@ -48,7 +48,7 @@
                                   <tr>
                                     <th>Product Name</th>
                                     <th>Catalog</th>
-                                    <th>Price</th
+                                    <th>Price</th>
                                     <th>Action</th>
                                   </tr>
                                 </thead>

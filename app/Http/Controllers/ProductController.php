@@ -26,7 +26,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $limit = isset($request->limit) ? $request->limit : 10;
@@ -43,7 +43,7 @@ class ProductController extends Controller
                                     $q->where('merchant_id',$merchant_id);
                                 })
                                 ->paginate($limit);
-
+            
         return view('products.index',
         array(
             'header' => 'Product',
@@ -116,6 +116,17 @@ class ProductController extends Controller
         ];
     }
 
+    public function removeImage($id){
+        $product_image = ProductImage::where('id',$id)->first();
+        if($product_image){
+            $product_image->delete();
+            return $response = [
+                'status'=> 'saved'
+            ];
+        }
+        
+    }
+
     /**
      * Display the specified resource.
      *
@@ -138,7 +149,12 @@ class ProductController extends Controller
         return view('products.edit_product',
         array(
             'header' => 'Product',
+            'id' => $id
         ));
+    }
+    public function info($id)
+    {
+       return Product::with('images')->where('id',$id)->first();
     }
 
     /**

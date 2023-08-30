@@ -6,7 +6,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>New Product</h4>
+                                <h4>Edit Product</h4>
                             </div>
                             <div class="card-body">
                                 <div class="row mt-1">
@@ -24,6 +24,20 @@
                                                 </div>
                                             </div>
                                             <gallery :images="finalImages" :index="activeImageIndex" ref="gallery">
+                                            </gallery>
+                                        </div>
+                                        <div v-if="product.images">
+                                            Uploaded Images
+                                            <div class="product-images">
+                                                <div v-for="(image, index) in  product.images " :key="index"
+                                                    class="product-image">
+                                                    <img :src="'/storage/product_images/' + image.image_file"
+                                                        @click="openGallery(index)" alt="Product Image" />
+                                                    <button @click="removeUploadedImage(image)" title="Remove"
+                                                        class="btn btn-circle btn-sm btn-warning">x</button>
+                                                </div>
+                                            </div>
+                                            <gallery :images="productImages" :index="activeImageIndex" ref="gallery">
                                             </gallery>
                                         </div>
                                     </div>
@@ -106,6 +120,7 @@ import Gallery from "vue-gallery";
 import Swal from 'sweetalert2'
 
 export default {
+    props: ['product_id'],
     components: {
         VueCropper, Gallery
     },
@@ -122,20 +137,42 @@ export default {
             },
 
             activeImageIndex: 0,
+            activeImageIndex2: 0,
             disable_save: false,
 
             product: {
+                id: '',
                 name: '',
                 catalog: '',
                 price: '',
-            }
+                images: '',
+            },
+
+            productImages: [],
         };
     },
+    created() {
+        this.getProduct();
+    },
     methods: {
+        getProduct() {
+            console.log(this.product_id)
+            this.product = '';
+            axios.get("/info-product/" + this.product_id).then((response) => {
+                this.product = response.data;
+                if (this.product.images) {
+                    this.product.images.forEach(e => {
+                        var url = window.location.origin + '/storage/product_images/' + e.image_file;
+                        this.productImages.push(url);
+                    });
+                }
+
+            });
+        },
         saveProduct() {
             this.disable_save = true;
             Swal.fire({
-                title: 'Are you sure you want to save this product?',
+                title: 'Are you sure you want to update this product?',
                 icon: 'question',
                 showDenyButton: true,
                 confirmButtonText: `Yes`,
@@ -144,7 +181,8 @@ export default {
                 if (result.isConfirmed) {
                     let formData = new FormData();
 
-                    var postURL = `/store-product`;
+                    var postURL = `/update-product`;
+                    formData.append('id', this.product.id ? this.product.id : "");
                     formData.append('name', this.product.name ? this.product.name : "");
                     formData.append('catalog', this.product.catalog ? this.product.catalog : "");
                     formData.append('price', this.product.price ? this.product.price : "");
@@ -165,13 +203,32 @@ export default {
                         })
                         .catch(error => {
                             this.errors = error.response.data.errors;
-                            this.disable_save = false;
+                            this.savingDisable = false;
                         })
                 } else {
                     this.disable_save = false;
                 }
             })
 
+        },
+        removeUploadedImage(image) {
+            Swal.fire({
+                title: 'Are you sure you want to remove this product image?',
+                icon: 'question',
+                showDenyButton: true,
+                confirmButtonText: `Yes`,
+                denyButtonText: `No`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.get("/remove-product-image/" + image.id).then((response) => {
+                        if (response.data.status == 'saved') {
+                            Swal.fire('Image has been removed!', '', 'success').then(function () {
+                                location.reload();
+                            });
+                        }
+                    });
+                }
+            });
         },
         removeImage(index) {
             this.finalImages.splice(index, 1);

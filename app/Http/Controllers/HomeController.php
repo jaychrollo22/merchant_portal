@@ -23,10 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        return view('home',
-        array(
-            'header' => 'Dashboard',
-        ));
+        return redirect('/products');
+    //     return view('home',
+    //     array(
+    //         'header' => 'Dashboard',
+    //     ));
     }
 }
