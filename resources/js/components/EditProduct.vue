@@ -14,7 +14,7 @@
                                         <button class="btn btn-primary btn-sm mb-3" @click="openProductModal">Upload
                                             Image</button>
                                         <div v-if="finalImages.length > 0">
-                                            Product Images
+                                            New Images
                                             <div class="product-images">
                                                 <div v-for="(image, index) in finalImages" :key="index"
                                                     class="product-image">
@@ -193,7 +193,7 @@ export default {
                         .then(response => {
                             if (response.data.status == "saved") {
                                 Swal.fire('Product has been saved!', '', 'success').then(function () {
-                                    window.location.href = '/products';
+                                    location.reload();
                                 });
 
                             } else {

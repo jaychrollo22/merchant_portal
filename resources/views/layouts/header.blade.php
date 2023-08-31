@@ -135,12 +135,14 @@
               <li class="dropdown  @if($header == "Products") active @endif">
                 <a href="{{ url('/products') }}" class="nav-link" onclick='show();'><i data-feather="image"></i><span>Products</span></a>
               </li>
-              <li class="dropdown  @if($header == "Merchants") active @endif">
-                <a href="{{ url('/merchants') }}" class="nav-link" onclick='show();'><i data-feather="user-check"></i><span>Merchants</span></a>
-              </li>
-              <li class="dropdown  @if($header == "Users") active @endif">
-                <a href="{{ url('/users') }}" class="nav-link" onclick='show();'><i data-feather="user"></i><span>Users</span></a>
-              </li>
+              @if((auth()->user()->role == "Administrator"))
+                <li class="dropdown  @if($header == "Merchants") active @endif">
+                  <a href="{{ url('/merchants') }}" class="nav-link" onclick='show();'><i data-feather="user-check"></i><span>Merchants</span></a>
+                </li>
+                <li class="dropdown  @if($header == "Users") active @endif">
+                  <a href="{{ url('/users') }}" class="nav-link" onclick='show();'><i data-feather="user"></i><span>Users</span></a>
+                </li>
+              @endif
             </ul>
         </aside>
       </div>

@@ -164,9 +164,54 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // return $request->all();
+        $validator = $request->validate([
+            'name' => 'required',
+            'catalog' => 'required',
+            'price' => 'required',
+        ]);
+
+        $product = Product::where('id',$request->id)->first();
+        if($product){
+
+            $product->name = $request->name;
+            $product->catalog = $request->catalog;
+            $product->price = $request->price;
+            $product->remarks = $request->remarks;
+            $product->save();
+
+            if($request->images){
+                $images = json_decode($request->images);
+
+                if(count($images)){
+                    foreach($images as $k=> $image){
+
+                        $base64_str = substr($image, strpos($image, ",")+1);
+                        $image = base64_decode($base64_str);
+                        
+                        $path = $product->id . '_'. $k . '.png';
+                        Storage::disk('public')->put('product_images/'.$path,  $image);
+
+                        $new_product_image = new ProductImage;
+                        $new_product_image->product_id = $product->id;
+                        $new_product_image->image_file = $path;
+                        $new_product_image->save();
+
+                    }
+                }
+            }
+            return $response = [
+                'status'=> 'saved'
+            ];
+        }else{
+            return $response = [
+                'status'=> 'error'
+            ];
+        }
+
+        
     }
 
     /**

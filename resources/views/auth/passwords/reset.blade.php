@@ -14,6 +14,7 @@
                     <h3 class="mb-4 text-center">{{ config('app.name', 'Merchant Portal') }}</h3>
                     <form method="POST" action="{{ route('password.update') }}" aria-label="{{ __('Login') }}" onsubmit='show()' >
                         @csrf
+                        <input type="hidden" name="token" value="{{ $token }}">
                         <div class="form-group">
                             <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus  placeholder="Email">
                         </div>
@@ -27,7 +28,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input id="password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <input id="password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                         </div>
                        
                         @if($errors->any())
