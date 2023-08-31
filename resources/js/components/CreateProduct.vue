@@ -128,6 +128,7 @@ export default {
                 name: '',
                 catalog: '',
                 price: '',
+                remarks: '',
             }
         };
     },
@@ -148,6 +149,7 @@ export default {
                     formData.append('name', this.product.name ? this.product.name : "");
                     formData.append('catalog', this.product.catalog ? this.product.catalog : "");
                     formData.append('price', this.product.price ? this.product.price : "");
+                    formData.append('remarks', this.product.remarks ? this.product.remarks : "");
                     formData.append('images', this.finalImages ? JSON.stringify(this.finalImages) : "");
 
 
