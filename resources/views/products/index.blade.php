@@ -49,6 +49,7 @@
                                     <th>Product Name</th>
                                     <th>Catalog</th>
                                     <th>Price</th>
+                                    <th>Date Modified</th>
                                     <th>Action</th>
                                   </tr>
                                 </thead>
@@ -58,6 +59,7 @@
                                             <td>{{$product->name}}</td>
                                             <td>{{$product->catalog}}</td>
                                             <td>{{$product->price}}</td>
+                                            <td>{{ date('F d, Y h:i A',strtotime($product->updated_at)) }}</td>
                                             <td>
                                                 <a href="/edit-product/{{$product->id}}" class="btn btn-outline-info btn-icon-text btn-sm">
                                                     Edit

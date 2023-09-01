@@ -54,6 +54,7 @@
                                     <th>Contact Person</th>
                                     <th>Contact Phone</th>
                                     <th>Contact Email</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                     </tr>
                                 </thead>
@@ -70,6 +71,7 @@
                                                 <td>{{$merchant->contact_person}}</td>
                                                 <td>{{$merchant->contact_phone}}</td>
                                                 <td>{{$merchant->contact_email}}</td>
+                                                <td>{{$merchant->status}}</td>
                                                 <td>
                                                     <a href="/edit-merchant/{{$merchant->id}}" target="_blank" class="btn btn-outline-info btn-icon-text btn-sm">
                                                         Edit

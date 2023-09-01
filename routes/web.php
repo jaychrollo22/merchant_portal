@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/register-merchant', 'RegisterMerchantController@index');
+Route::post('/store-register-merchant', 'RegisterMerchantController@store');
+
 
 Route::get('/', function () {
     return redirect('/login');
 });
-
-Route::get('/register-merchant', 'MerchantController@register');
-Route::post('/store-register-merchant', 'MerchantController@storeRegister');
 
 Auth::routes();
 

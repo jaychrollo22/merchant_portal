@@ -179,6 +179,10 @@ export default {
             this.finalImages.splice(index, 1);
         },
         openProductModal() {
+
+            this.imageSrc = '';
+            document.getElementById('file_upload').value = '';
+
             $('#product-modal').modal('show');
         },
         closeProductModal() {

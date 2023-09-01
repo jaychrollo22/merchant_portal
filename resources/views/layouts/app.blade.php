@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <link rel="shortcut icon" href="{{asset('images/icon.png')}}">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
@@ -49,12 +49,15 @@
             }
         }
         body {
-        background-image: url("{{ asset('login_css/images/bg.png')}}");
+            background-image: url("{{ asset('login_css/images/bg.png')}}");
+            background-size: cover!important;
+            background-position: center!important;
+            min-height: 100vh!important;
         }
     </style>
     	<link rel="stylesheet" href="{{ asset('login_css/css/style.css') }}">
 </head>
-<body class="img js-fullheight" >
+<body>
     <div id = "myDiv" style="display:none;" class="loader">
     </div>
     <div id="app">

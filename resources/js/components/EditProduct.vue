@@ -32,12 +32,13 @@
                                                 <div v-for="(image, index) in  product.images " :key="index"
                                                     class="product-image">
                                                     <img :src="'/storage/product_images/' + image.image_file"
-                                                        @click="openGallery(index)" alt="Product Image" />
+                                                        @click="openGalleryUploaded(index)" alt="Product Image" />
                                                     <button @click="removeUploadedImage(image)" title="Remove"
                                                         class="btn btn-circle btn-sm btn-warning">x</button>
                                                 </div>
                                             </div>
-                                            <gallery :images="productImages" :index="activeImageIndex" ref="gallery">
+                                            <gallery :images="productImages" :index="activeImageIndexUploaded"
+                                                ref="gallery_uploaded">
                                             </gallery>
                                         </div>
                                     </div>
@@ -137,7 +138,7 @@ export default {
             },
 
             activeImageIndex: 0,
-            activeImageIndex2: 0,
+            activeImageIndexUploaded: 0,
             disable_save: false,
 
             product: {
@@ -150,6 +151,8 @@ export default {
             },
 
             productImages: [],
+
+
         };
     },
     created() {
@@ -236,6 +239,9 @@ export default {
             this.finalImages.splice(index, 1);
         },
         openProductModal() {
+            this.imageSrc = '';
+            document.getElementById('file_upload').value = '';
+
             $('#product-modal').modal('show');
         },
         closeProductModal() {
@@ -244,6 +250,10 @@ export default {
         openGallery(index) {
             this.activeImageIndex = index;
             this.$refs.gallery.open();
+        },
+        openGalleryUploaded(index) {
+            this.activeImageIndexUploaded = index;
+            this.$refs.gallery_uploaded.open();
         },
 
         handleFileChange(event) {

@@ -12,6 +12,16 @@
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
                     <h3 class="mb-4 text-center">{{ config('app.name', 'Merchant Portal') }}</h3>
+
+                    @if(request('registered'))
+                        @if(request('registered') == true)
+                            <div class="form-group alert alert-success alert-dismissable">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                <strong>Successfully Registered</strong>
+                            </div>
+                        @endif
+                    @endif
+
                     <form method="POST" action="{{ route('login') }}"  aria-label="{{ __('Login') }}" onsubmit='show()' >
                         @csrf
                         <div class="form-group">
@@ -34,6 +44,7 @@
                             <div class="w-50"> </div>
                             <div class="w-50 text-md-right">
                                 <a href="{{ route('password.request') }}" onclick='show()' style="color: #fff">Forgot Password</a>
+                                <a href="/register-merchant" onclick='show()' style="color: #fff">Register</a>
                             </div>
                         </div>
                     </form>

@@ -68,6 +68,7 @@
                                             <select name="status" class="form-control">
                                                 <option value="Active" {{ $merchant->status == 'Active' ? 'selected' : '' }}>Active</option>
                                                 <option value="Inactive" {{ $merchant->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                                                <option value="For Approval" {{ $merchant->status == 'For Approval' ? 'selected' : '' }}>For Approval</option>
                                             </select>
                                         </div>
                                     </div>
