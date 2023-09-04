@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Merchant;
-
 use RealRashid\SweetAlert\Facades\Alert;
-
 
 class RegisterMerchantController extends Controller
 {
@@ -17,7 +15,16 @@ class RegisterMerchantController extends Controller
      */
     public function index()
     {
-        return view('merchants.register');
+
+        $url = "https://restcountries.com/v3.1/all";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $response = curl_exec($ch);
+        // return json_decode($response);
+        return view('merchants.register',array('countries'=>json_decode($response)));
     }
 
     /**

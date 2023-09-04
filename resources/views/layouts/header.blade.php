@@ -195,6 +195,7 @@
 
   <script src="{{ asset('js/all-1.0.0.js') }}"></script>
 
+  @yield('ForApprovalScript')
 
 </body>
 </html>

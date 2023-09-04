@@ -66,16 +66,23 @@
                                         <div class='col-md-4 form-group'>
                                             Status
                                             <select name="status" class="form-control">
+                                                <option value="">Choose</option>
                                                 <option value="Active" {{ $merchant->status == 'Active' ? 'selected' : '' }}>Active</option>
                                                 <option value="Inactive" {{ $merchant->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
-                                                <option value="For Approval" {{ $merchant->status == 'For Approval' ? 'selected' : '' }}>For Approval</option>
+                                                {{-- <option value="For Approval" {{ $merchant->status == 'For Approval' ? 'selected' : '' }}>For Approval</option> --}}
                                             </select>
                                         </div>
                                     </div>
 
                                     <a href='/merchants' type="button" class="btn btn-secondary">Close</a>
                                     <button type="submit" class="btn btn-primary">Save</button>
+                                    
+                                    @if($merchant->status == 'For Approval')
+                                        <button type="button" id="{{ $merchant->id }}" onclick="approveMerchant(this.id)" class="btn btn-success">Approve</a>
+                                    @endif
+                                    
                                 </form>
+                                
                             </div>
                         </div>
                     </div>
@@ -84,4 +91,50 @@
         </div>
     </section>
 </div>
+
+
 @endsection
+
+@section('ForApprovalScript')
+	<script>
+		function approveMerchant(id) {
+			swal({
+					title: "Approve Merchant",
+					text: "Are you sure you want to approve this merchant?" + id,
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
+				})
+				.then((willCancel) => {
+					if (willCancel) {
+						document.getElementById("myDiv").style.display = "block";
+						$.ajax({
+							url: "/approve-merchant/" + id,
+							method: "GET",
+							// data: {
+							// 	id: id
+							// },
+							headers: {
+								'X-CSRF-TOKEN': '{{ csrf_token() }}'
+							},
+							success: function(data) {
+								document.getElementById("myDiv").style.display = "none";
+								swal("Merchant has been approved!", {
+									icon: "success",
+								}).then(function() {
+                                    location.reload();
+                                })
+							}
+						})
+
+					} else {
+            swal({text:"Approval stopped",icon:"success"});
+					}
+				});
+		}
+
+	</script>
+@endsection
+
+
+

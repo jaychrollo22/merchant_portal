@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Merchant;
+use App\User;
 
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 class MerchantController extends Controller
 {
@@ -83,9 +85,29 @@ class MerchantController extends Controller
         return redirect('/merchants');
     }
 
-    public function storeRegister(Request $request)
+    public function approveMerchant($id)
     {
-        //
+        $merchant = Merchant::where('id',$id)->first();
+
+        if($merchant){
+            //Save User
+            $new_user = new User;
+            $new_user->name = $merchant->contact_person;
+            $new_user->email = $merchant->contact_email;
+
+            $randomPassword = Str::random(12);
+            $new_user->password = bcrypt($randomPassword);
+            $new_user->merchant_id = $merchant->id;
+            $new_user->role = 'Merchant';
+            $new_user->status = 'Active';
+            $new_user->save();
+
+            $merchant->status = 'Active';
+            $merchant->save();
+
+            Alert::success('Successfully Stored')->persistent('Dismiss');
+            return redirect('/merchants');
+        }
     }
 
     /**

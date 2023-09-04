@@ -53,7 +53,12 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="country" value="{{ old('country') }}" required  placeholder="Country">
+                                    <select class="form-control" id="country" name="country" value="{{ old('country') }}" required>
+                                        <option value="" class="text-dark ">Choose</option>
+                                        @foreach($countries as $key => $country)
+                                            <option value="{{$country->cca2}}" class="text-dark flag-icon flag-icon-{{ strtolower($country->cca2) }}" @if($country->cca2 == 'PH') selected @endif> {{$country->name->common}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">

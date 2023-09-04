@@ -39,6 +39,7 @@ Route::get('/create-merchant', 'MerchantController@create');
 Route::get('/edit-merchant/{id}', 'MerchantController@edit');
 Route::post('/store-merchant', 'MerchantController@store');
 Route::post('/update-merchant/{merchant}', 'MerchantController@update');
+Route::get('/approve-merchant/{merchant}', 'MerchantController@approveMerchant');
 
 // Users
 Route::get('/users', 'UserController@index')->name('user');
@@ -48,6 +49,9 @@ Route::get('/change-password/{user}', 'UserController@changePassword');
 Route::post('/change-password-user/{user}', 'UserController@changePasswordUser');
 Route::post('/store-user', 'UserController@store');
 Route::post('/update-user/{user}', 'UserController@update');
+
+
+
 
 
 
