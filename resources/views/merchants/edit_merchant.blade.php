@@ -83,7 +83,18 @@
                                     
                                 </form>
                                 
+
+                                
+
                             </div>
+
+                            <div class="col-md-12 mt-5">
+                                <h5>Uploaded Documents</h5>
+                                @foreach ( $merchant->merchant_documents as $item )
+                                    <a href="/storage/merchant_documents/{{$merchant->id}}/{{$item->original_filename}}" target="_blank">{{$item->original_filename}}</a> <br>
+                                @endforeach
+                            </div>
+
                         </div>
                     </div>
                 </div>

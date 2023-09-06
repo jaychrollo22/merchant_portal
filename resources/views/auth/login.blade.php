@@ -17,7 +17,7 @@
                         @if(request('registered') == true)
                             <div class="form-group alert alert-success alert-dismissable">
                                 <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                <strong>Successfully Registered</strong>
+                                <strong>Successfully Registered. We will get back to you once we validate your information. Thank you.</strong>
                             </div>
                         @endif
                     @endif

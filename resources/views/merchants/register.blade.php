@@ -12,7 +12,7 @@
             <div class="col-md-8 col-lg-8">
                 <div class="login-wrap p-0">
                     <h3 class="mb-4 text-center">{{ config('app.name', 'Merchant Portal') }}</h3>
-                    <form method="POST" action="/store-register-merchant"  aria-label="{{ __('Fill Up Information') }}" onsubmit='show()' >
+                    <form method="POST" action="/store-register-merchant"  aria-label="{{ __('Fill Up Information') }}" onsubmit='show()'  enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
@@ -74,6 +74,11 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <input type="email" class="form-control" name="contact_email" value="{{ old('contact_email') }}" required  placeholder="Contact Email">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="file" class="form-control" name="files[]" multiple accept=".pdf" required>
                                 </div>
                             </div>
                         </div>

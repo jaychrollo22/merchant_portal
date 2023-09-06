@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Merchant;
 use App\User;
 
+use Illuminate\Support\Facades\Storage;
+
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 
@@ -129,7 +131,7 @@ class MerchantController extends Controller
      */
     public function edit($id)
     {
-        $merchant = Merchant::where('id',$id)->first();
+        $merchant = Merchant::with('merchant_documents')->where('id',$id)->first();
 
         return view('merchants.edit_merchant',
         array(

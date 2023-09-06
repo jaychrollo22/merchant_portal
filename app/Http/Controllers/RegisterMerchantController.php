@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Merchant;
+use App\MerchantDocument;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Carbon\Carbon;
+use Storage;
 class RegisterMerchantController extends Controller
 {
     /**
@@ -35,6 +37,8 @@ class RegisterMerchantController extends Controller
      */
     public function store(Request $request)
     {
+
+        // return $request->all();
         $new_merchant = new Merchant;
         $new_merchant->name = $request->name;
         $new_merchant->address = $request->address;
@@ -50,6 +54,28 @@ class RegisterMerchantController extends Controller
         $new_merchant->contact_email = $request->contact_email;
         $new_merchant->status = 'For Approval';
         $new_merchant->save();
+
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $dateFolder = Carbon::now()->format('Ymd'); // Generate a folder path based on the current date
+                $original_filename = $file->getClientOriginalName();
+                $fileSizeInBytes = $file->getSize();
+                $fileSizeInMB = round($fileSizeInBytes / 1024 / 1024, 2);
+
+                if (!Storage::exists("public/merchant_documents/{$new_merchant->id}")) {
+                    Storage::makeDirectory("public/merchant_documents/{$new_merchant->id}");
+                }
+
+                $file->storeAs('public/merchant_documents/' . $new_merchant->id, $original_filename);
+
+                $new_merchant_doc = new MerchantDocument;
+                $new_merchant_doc->original_filename = $original_filename;
+                $new_merchant_doc->size = $fileSizeInMB;
+                $new_merchant_doc->merchant_id = $new_merchant->id;
+                $new_merchant_doc->save();
+
+            }
+        }
 
         return redirect('/login?registered=true');
     }
