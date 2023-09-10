@@ -33,6 +33,20 @@ Route::post('/store-product', 'ProductController@store');
 Route::post('/update-product', 'ProductController@update');
 Route::get('/remove-product-image/{id}', 'ProductController@removeImage');
 
+// Categories
+Route::get('/product-categories', 'ProductCategoryController@index')->name('category');
+Route::get('/create-product-category', 'ProductCategoryController@create');
+Route::get('/edit-product-category/{id}', 'ProductCategoryController@edit');
+Route::post('/store-product-category', 'ProductCategoryController@store');
+Route::post('/update-product-category/{id}', 'ProductCategoryController@update');
+
+// Variants
+Route::get('/product-variants', 'ProductVariantController@index')->name('variant');
+Route::get('/create-product-variant', 'ProductVariantController@create');
+Route::get('/edit-product-variant/{id}', 'ProductVariantController@edit');
+Route::post('/store-product-variant', 'ProductVariantController@store');
+Route::post('/update-product-variant/{id}', 'ProductVariantController@update');
+
 // Merchant
 Route::get('/merchants', 'MerchantController@index')->name('merchant');
 Route::get('/create-merchant', 'MerchantController@create');
